@@ -8,9 +8,25 @@ body {
 #game {
   position: relative;
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
+
   background: #666;
   overflow: hidden;
+}
+
+/* 空 */
+#sky {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 10%;
+
+  background: #64b5f6;
+
+  z-index: 0;
 }
 
 /* ドット絵を綺麗に */
