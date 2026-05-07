@@ -28,7 +28,28 @@ body {
 
   z-index: 0;
 }
+#roadLine {
+  position: absolute;
 
+  top: 50%;
+  left: 0;
+
+  width: 100%;
+  height: 12px;
+
+  transform: translateY(-50%);
+
+  background:
+    repeating-linear-gradient(
+      to right,
+      white 0px,
+      white 60px,
+      transparent 60px,
+      transparent 110px
+    );
+
+  opacity: 0.9;
+}
 /* ドット絵を綺麗に */
 img {
   image-rendering: pixelated;
