@@ -73,26 +73,16 @@ img {
   top: 120px;
   left: 100vw;
 }
+#butterfly {
+  position: absolute;
 
-/* ボタン */
-#controls {
-  height: 20vh;
+  width: 64px;
+  height: 64px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+  display: none;
 
-  background: #222;
+  image-rendering: pixelated;
+
+  pointer-events: none;
 }
 
-button {
-  width: 100px;
-  height: 100px;
-
-  font-size: 40px;
-  border: none;
-  border-radius: 16px;
-
-  background: #ddd;
-}
