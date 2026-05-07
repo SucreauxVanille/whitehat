@@ -4,9 +4,18 @@ const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
 let roadX = 0;
+
+const orange = document.getElementById("orange");
+let orangeX = window.innerWidth * 0.7;
+let orangeY = 300;
+const orangeSpeed = hatSpeed;
+
+let orangeStock = 0;
+let firstOrangeCollected = false;
 const stock1 = document.getElementById("stock1");
 const stock2 = document.getElementById("stock2");
 const stock3 = document.getElementById("stock3");
+
 const butterfly = document.getElementById("butterfly");
 let butterflyActive = false;
 
@@ -175,8 +184,6 @@ function checkOrangeCollision() {
     }
 
     firstOrangeCollected = true;
-
-    updateOrangeCount();
 
     // 消す
     orangeX = window.innerWidth + Math.random() * 400;
