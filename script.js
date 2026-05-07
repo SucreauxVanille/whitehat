@@ -36,7 +36,11 @@ function updateHat() {
     hatX = window.innerWidth + Math.random() * 300;
 
     // 高さランダム
-    hatY = Math.random() * (game.clientHeight - 120);
+const skyHeight = game.clientHeight * 0.1;
+
+hatY =
+  skyHeight +
+  Math.random() * (game.clientHeight - skyHeight - 120);
   }
 
   hat.style.left = hatX + "px";
