@@ -105,8 +105,10 @@ game.addEventListener("pointermove", (e) => {
     Math.min(taxiX, rect.width - 96)
   );
 
-  taxiY = Math.max(
-    0,
+const skyHeight = game.clientHeight * 0.1;
+
+taxiY = Math.max(
+  skyHeight,
     Math.min(taxiY, rect.height - 96)
   );
 
