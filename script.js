@@ -2,7 +2,6 @@ const game = document.getElementById("game");
 
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
-let dragging = false;
 const roadLine = document.getElementById("roadLine");
 
 let roadX = 0;
@@ -103,21 +102,18 @@ function gameLoop() {
 // =========================
 // タップ移動
 // =========================
-game.addEventListener("pointerdown", () => {
-  dragging = true;
-});
-game.addEventListener("pointerup", () => {
-  dragging = false;
-});
+// =========================
+// スマホ操作
+// =========================
+game.addEventListener("touchmove", e => {
 
-game.addEventListener("pointermove", (e) => {
+  e.preventDefault();
 
-  if (!dragging) return;
-
+  const touch = e.touches[0];
   const rect = game.getBoundingClientRect();
 
-  taxiX = e.clientX - rect.left - 48;
-  taxiY = e.clientY - rect.top - 48;
+  taxiX = touch.clientX - rect.left - 48;
+  taxiY = touch.clientY - rect.top - 48;
 
   // 画面外防止
   taxiX = Math.max(
@@ -125,10 +121,38 @@ game.addEventListener("pointermove", (e) => {
     Math.min(taxiX, rect.width - 96)
   );
 
-const skyHeight = game.clientHeight * 0.1;
+  const skyHeight = game.clientHeight * 0.1;
 
-taxiY = Math.max(
-  skyHeight,
+  taxiY = Math.max(
+    skyHeight,
+    Math.min(taxiY, rect.height - 96)
+  );
+
+  updateTaxi();
+
+}, { passive: false });
+
+// =========================
+// PC操作
+// =========================
+game.addEventListener("mousemove", e => {
+
+  if (e.buttons !== 1) return;
+
+  const rect = game.getBoundingClientRect();
+
+  taxiX = e.clientX - rect.left - 48;
+  taxiY = e.clientY - rect.top - 48;
+
+  taxiX = Math.max(
+    0,
+    Math.min(taxiX, rect.width - 96)
+  );
+
+  const skyHeight = game.clientHeight * 0.1;
+
+  taxiY = Math.max(
+    skyHeight,
     Math.min(taxiY, rect.height - 96)
   );
 
