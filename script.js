@@ -4,7 +4,9 @@ const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
 let roadX = 0;
-
+const stock1 = document.getElementById("stock1");
+const stock2 = document.getElementById("stock2");
+const stock3 = document.getElementById("stock3");
 const butterfly = document.getElementById("butterfly");
 let butterflyActive = false;
 
@@ -133,6 +135,76 @@ function checkCollision() {
     hatY = Math.random() * (game.clientHeight - 120);
   }
 }
+// みかん関数、つまりみかんすう
+function updateOrange() {
+
+  orangeX -= orangeSpeed;
+
+  // 画面外
+  if (orangeX < -60) {
+
+    orangeX = window.innerWidth + Math.random() * 400;
+
+    const skyHeight = game.clientHeight * 0.1;
+
+    orangeY =
+      skyHeight +
+      Math.random() *
+      (game.clientHeight - skyHeight - 120);
+  }
+
+  orange.style.left = orangeX + "px";
+  orange.style.top = orangeY + "px";
+}
+function checkOrangeCollision() {
+
+  const taxiSize = 96;
+  const orangeSize = 36;
+
+  const hit =
+    taxiX < orangeX + orangeSize &&
+    taxiX + taxiSize > orangeX &&
+    taxiY < orangeY + orangeSize &&
+    taxiY + taxiSize > orangeY;
+
+  if (hit) {
+
+    // 最大3個
+    if (orangeStock < 3) {
+      orangeStock++;
+    }
+
+    firstOrangeCollected = true;
+
+    updateOrangeCount();
+
+    // 消す
+    orangeX = window.innerWidth + Math.random() * 400;
+  }
+}
+function updateOrangeStockDisplay() {
+
+  const stocks = [stock1, stock2, stock3];
+
+  stocks.forEach((stock, i) => {
+
+    if (i < orangeStock) {
+
+      stock.style.display = "block";
+
+      // タクシー上へ並べる
+      stock.style.left =
+        (taxiX + 10 + i * 26) + "px";
+
+      stock.style.top =
+        (taxiY - 20) + "px";
+
+    } else {
+
+      stock.style.display = "none";
+    }
+  });
+}
 
 // =========================
 // ゲームループ
@@ -141,13 +213,22 @@ function gameLoop() {
 
   updateKeyboardMove();
 
-  updateHat();
+  // 最初に夏みかんを拾うまで帽子を出さない
+  if (firstOrangeCollected) {
+    updateHat();
+  }
+
+  updateOrange();
 
   updateRoadLine();
 
   updateButterfly();
 
   checkCollision();
+
+  checkOrangeCollision();
+
+  updateOrangeStockDisplay();
 
   requestAnimationFrame(gameLoop);
 }
