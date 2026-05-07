@@ -8,7 +8,6 @@ let roadX = 0;
 const orange = document.getElementById("orange");
 let orangeX = window.innerWidth * 0.7;
 let orangeY = 300;
-const orangeSpeed = hatSpeed;
 
 let orangeStock = 0;
 let firstOrangeCollected = false;
@@ -38,6 +37,8 @@ let hatY = 200;
 // ===== 帽子速度 =====
 const hatSpeed = 8;
 
+// ===== みかん速度 =====
+const orangeSpeed = hatSpeed;
 //ちょうちょ
 function updateButterfly() {
 
