@@ -50,14 +50,17 @@ function checkCollision() {
   const taxiRect = taxi.getBoundingClientRect();
   const hatRect = hat.getBoundingClientRect();
 
+  // 少し内側で判定
+  const margin = 20;
+
   const hit =
-    taxiRect.left < hatRect.right &&
-    taxiRect.right > hatRect.left &&
-    taxiRect.top < hatRect.bottom &&
-    taxiRect.bottom > hatRect.top;
+    taxiRect.left + margin < hatRect.right &&
+    taxiRect.right - margin > hatRect.left &&
+    taxiRect.top + margin < hatRect.bottom &&
+    taxiRect.bottom - margin > hatRect.top;
 
   if (hit) {
-    console.log("帽子に当たった！");
+    console.log("白いぼうしだ！");
   }
 }
 
@@ -76,14 +79,14 @@ function gameLoop() {
 // =========================
 // タップ移動
 // =========================
-game.addEventListener("pointerdown", (e) => {
+game.addEventListener("pointermove", (e) => {
 
   const rect = game.getBoundingClientRect();
 
   taxiX = e.clientX - rect.left - 48;
   taxiY = e.clientY - rect.top - 48;
 
-  // ===== 画面外防止 =====
+  // 画面外防止
   taxiX = Math.max(
     0,
     Math.min(taxiX, rect.width - 96)
