@@ -1,17 +1,32 @@
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
-
-let taxiX = window.innerWidth / 2 - 48;
 let hatX = window.innerWidth;
+let taxiX = window.innerWidth / 2 - 48;
+let taxiY = window.innerHeight * 0.6;
 
 const speed = 8;
 
+// タップ位置へ移動
+document.getElementById("game").addEventListener("pointerdown", (e) => {
+
+  const gameRect = document
+    .getElementById("game")
+    .getBoundingClientRect();
+
+  taxiX = e.clientX - gameRect.left - 48;
+  taxiY = e.clientY - gameRect.top - 48;
+
+  // 画面外防止
+  taxiX = Math.max(0, Math.min(taxiX, gameRect.width - 96));
+  taxiY = Math.max(0, Math.min(taxiY, gameRect.height - 96));
+
+  updateTaxi();
+});
 // タクシー更新
 function updateTaxi() {
   taxi.style.left = taxiX + "px";
+  taxi.style.top = taxiY + "px";
 }
 
 // 帽子更新
@@ -53,21 +68,6 @@ function gameLoop() {
 
 gameLoop();
 
-// 左右移動
-leftBtn.addEventListener("click", () => {
-  taxiX -= 30;
-
-  if (taxiX < 0) taxiX = 0;
-
-  updateTaxi();
-});
-
-rightBtn.addEventListener("click", () => {
-  taxiX += 30;
-
-  if (taxiX > window.innerWidth - 96) {
-    taxiX = window.innerWidth - 96;
-  }
 
   updateTaxi();
 });
