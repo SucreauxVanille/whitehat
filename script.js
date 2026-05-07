@@ -3,6 +3,9 @@ const game = document.getElementById("game");
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 let dragging = false;
+const roadLine = document.getElementById("roadLine");
+
+let roadX = 0;
 
 // ===== タクシー位置 =====
 let taxiX = window.innerWidth / 2 - 48;
@@ -15,6 +18,18 @@ let hatY = 200;
 // ===== 帽子速度 =====
 const hatSpeed = 8;
 
+// 中央分離帯
+function updateRoadLine() {
+
+  roadX -= hatSpeed;
+
+  // ループ
+  if (roadX <= -110) {
+    roadX = 0;
+  }
+
+  roadLine.style.left = roadX + "px";
+}
 // =========================
 // タクシー更新
 // =========================
@@ -79,11 +94,12 @@ function gameLoop() {
 
   updateHat();
 
+  updateRoadLine();
+
   checkCollision();
 
   requestAnimationFrame(gameLoop);
 }
-
 // =========================
 // タップ移動
 // =========================
