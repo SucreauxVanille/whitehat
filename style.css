@@ -85,4 +85,25 @@ img {
 
   pointer-events: none;
 }
+#orange {
+  position: absolute;
 
+  width: 36px;
+  height: 36px;
+
+  image-rendering: pixelated;
+}
+.stockOrange {
+  position: absolute;
+
+  width: 24px;
+  height: 24px;
+
+  display: none;
+
+  image-rendering: pixelated;
+
+  pointer-events: none;
+
+  z-index: 5;
+}
