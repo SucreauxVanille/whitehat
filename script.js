@@ -139,6 +139,8 @@ function checkCollision() {
 // =========================
 function gameLoop() {
 
+  updateKeyboardMove();
+
   updateHat();
 
   updateRoadLine();
@@ -181,22 +183,46 @@ game.addEventListener("touchmove", e => {
 }, { passive: false });
 
 // =========================
-// PC操作
+// キーボード操作
 // =========================
-game.addEventListener("mousemove", e => {
+const keys = {};
 
-  if (e.buttons !== 1) return;
+document.addEventListener("keydown", e => {
+  keys[e.key] = true;
+});
+
+document.addEventListener("keyup", e => {
+  keys[e.key] = false;
+});
+function updateKeyboardMove() {
+
+  const speed = 6;
+
+  if (keys["ArrowLeft"]) {
+    taxiX -= speed;
+  }
+
+  if (keys["ArrowRight"]) {
+    taxiX += speed;
+  }
+
+  if (keys["ArrowUp"]) {
+    taxiY -= speed;
+  }
+
+  if (keys["ArrowDown"]) {
+    taxiY += speed;
+  }
 
   const rect = game.getBoundingClientRect();
 
-  taxiX = e.clientX - rect.left - 48;
-  taxiY = e.clientY - rect.top - 48;
-
+  // 横制限
   taxiX = Math.max(
     0,
     Math.min(taxiX, rect.width - 96)
   );
 
+  // 空侵入禁止
   const skyHeight = game.clientHeight * 0.1;
 
   taxiY = Math.max(
@@ -205,8 +231,7 @@ game.addEventListener("mousemove", e => {
   );
 
   updateTaxi();
-});
-
+}
 // =========================
 // 初期化
 // =========================
