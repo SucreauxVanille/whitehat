@@ -47,20 +47,23 @@ function updateHat() {
 // =========================
 function checkCollision() {
 
-  const taxiRect = taxi.getBoundingClientRect();
-  const hatRect = hat.getBoundingClientRect();
-
-  // 少し内側で判定
-  const margin = 20;
+  // 当たり判定サイズ
+  const taxiSize = 96;
+  const hatSize = 72;
 
   const hit =
-    taxiRect.left + margin < hatRect.right &&
-    taxiRect.right - margin > hatRect.left &&
-    taxiRect.top + margin < hatRect.bottom &&
-    taxiRect.bottom - margin > hatRect.top;
+    taxiX < hatX + hatSize &&
+    taxiX + taxiSize > hatX &&
+    taxiY < hatY + hatSize &&
+    taxiY + taxiSize > hatY;
 
   if (hit) {
+
     console.log("白いぼうしだ！");
+
+    // 帽子を消す（右へ戻す）
+    hatX = window.innerWidth + Math.random() * 300;
+    hatY = Math.random() * (game.clientHeight - 120);
   }
 }
 
