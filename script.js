@@ -11,8 +11,8 @@ let butterflyActive = false;
 let butterflyX = 0;
 let butterflyY = 0;
 
-let butterflyVX = -4;
-let butterflyVY = -3;
+let butterflyVX = -5;
+let butterflyVY = -5;
 
 let butterflyFrame = 0;
 
