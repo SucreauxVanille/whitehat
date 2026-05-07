@@ -2,6 +2,7 @@ const game = document.getElementById("game");
 
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
+let dragging = false;
 
 // ===== タクシー位置 =====
 let taxiX = window.innerWidth / 2 - 48;
@@ -82,7 +83,16 @@ function gameLoop() {
 // =========================
 // タップ移動
 // =========================
+game.addEventListener("pointerdown", () => {
+  dragging = true;
+});
+game.addEventListener("pointerup", () => {
+  dragging = false;
+});
+
 game.addEventListener("pointermove", (e) => {
+
+  if (!dragging) return;
 
   const rect = game.getBoundingClientRect();
 
