@@ -58,8 +58,8 @@ img {
 
 /* タクシー */
 #taxi {
-  width: 96px;
-  height: 96px;
+  width: 72px;
+  height: 72px;
 
   left: 50px;
   top: 300px;
@@ -67,8 +67,8 @@ img {
 
 /* 帽子 */
 #hat {
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
 
   top: 120px;
   left: 100vw;
@@ -76,8 +76,8 @@ img {
 #butterfly {
   position: absolute;
 
-  width: 64px;
-  height: 64px;
+  width: 24px;
+  height: 24px;
 
   display: none;
 
