@@ -3,8 +3,18 @@ const game = document.getElementById("game");
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
-
 let roadX = 0;
+
+const butterfly = document.getElementById("butterfly");
+let butterflyActive = false;
+
+let butterflyX = 0;
+let butterflyY = 0;
+
+let butterflyVX = -4;
+let butterflyVY = -3;
+
+let butterflyFrame = 0;
 
 // ===== タクシー位置 =====
 let taxiX = window.innerWidth / 2 - 48;
@@ -16,6 +26,34 @@ let hatY = 200;
 
 // ===== 帽子速度 =====
 const hatSpeed = 8;
+
+//ちょうちょ
+function updateButterfly() {
+
+  if (!butterflyActive) return;
+
+  butterflyFrame++;
+
+  // 左上へ移動
+  butterflyX += butterflyVX;
+
+  // ふわふわ上下
+  butterflyY +=
+    butterflyVY +
+    Math.sin(butterflyFrame * 0.2) * 2;
+
+  butterfly.style.left = butterflyX + "px";
+  butterfly.style.top = butterflyY + "px";
+
+  // 画面外で消す
+  if (
+    butterflyX < -100 ||
+    butterflyY < -100
+  ) {
+    butterflyActive = false;
+    butterfly.style.display = "none";
+  }
+}
 
 // 中央分離帯
 function updateRoadLine() {
@@ -83,6 +121,15 @@ function checkCollision() {
     // 帽子を消す（右へ戻す）
     hatX = window.innerWidth + Math.random() * 300;
     hatY = Math.random() * (game.clientHeight - 120);
+    // 蝶出現
+  butterflyActive = true;
+
+  butterflyX = hatX;
+  butterflyY = hatY;
+
+  butterflyFrame = 0;
+
+  butterfly.style.display = "block";
   }
 }
 
@@ -95,13 +142,13 @@ function gameLoop() {
 
   updateRoadLine();
 
+  updateButterfly();
+
   checkCollision();
 
   requestAnimationFrame(gameLoop);
 }
-// =========================
-// タップ移動
-// =========================
+
 // =========================
 // スマホ操作
 // =========================
