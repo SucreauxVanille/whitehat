@@ -118,18 +118,19 @@ function checkCollision() {
 
     console.log("白いぼうしだ！");
 
+  
+    // 蝶出現
+    butterflyActive = true;
+
+    butterflyX = hatX;
+    butterflyY = hatY;
+
+    butterflyFrame = 0;
+
+    butterfly.style.display = "block";
     // 帽子を消す（右へ戻す）
     hatX = window.innerWidth + Math.random() * 300;
     hatY = Math.random() * (game.clientHeight - 120);
-    // 蝶出現
-  butterflyActive = true;
-
-  butterflyX = hatX;
-  butterflyY = hatY;
-
-  butterflyFrame = 0;
-
-  butterfly.style.display = "block";
   }
 }
 
