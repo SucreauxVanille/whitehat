@@ -126,24 +126,36 @@ function checkCollision() {
     taxiY < hatY + hatSize &&
     taxiY + taxiSize > hatY;
 
-  if (hit) {
+if (hit) {
 
-    console.log("白いぼうしだ！");
+  // ===== 夏みかん所持 =====
+  if (orangeStock > 0) {
 
-  
-    // 蝶出現
-    butterflyActive = true;
+    orangeStock--;
 
-    butterflyX = hatX;
-    butterflyY = hatY;
+    console.log("夏みかんを置いていった！");
 
-    butterflyFrame = 0;
+  } else {
 
-    butterfly.style.display = "block";
-    // 帽子を消す（右へ戻す）
-    hatX = window.innerWidth + Math.random() * 300;
-    hatY = Math.random() * (game.clientHeight - 120);
+    console.log("ちょうちょが逃げた！");
+
   }
+
+  // 蝶出現
+  butterflyActive = true;
+
+  butterflyX = hatX;
+  butterflyY = hatY;
+
+  butterflyFrame = 0;
+
+  butterfly.style.display = "block";
+
+  // 帽子を右へ戻す
+  hatX = window.innerWidth + Math.random() * 300;
+
+  hatY = Math.random() * (game.clientHeight - 120);
+}
 }
 // みかん関数、つまりみかんすう
 function updateOrange() {
