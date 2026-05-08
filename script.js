@@ -1,4 +1,5 @@
 const game = document.getElementById("game");
+let hatWithOrange = false;
 let gameOver = false;
 let gameOverTimer = null;
 const gameOverScreen =
@@ -104,7 +105,10 @@ function updateHat() {
   hatX -= hatSpeed;
 
   // 画面外へ行ったら右へ戻す
-  if (hatX < -80) {
+if (hatX < -80) {
+
+  // 通常帽子へ戻す
+  hatWithOrange = false;
 
     hatX = window.innerWidth + Math.random() * 300;
 
@@ -115,7 +119,11 @@ hatY =
   skyHeight +
   Math.random() * (game.clientHeight - skyHeight - 120);
   }
-
+if (hatWithOrange) {
+  hat.src = "orangehat.gif";
+} else {
+  hat.src = "hat.gif";
+}
   hat.style.left = hatX + "px";
   hat.style.top = hatY + "px";
 }
@@ -156,11 +164,14 @@ function checkCollision() {
   // =====================
   // 🍊あり
   // =====================
-  if (orangeStock > 0) {
+ if (orangeStock > 0) {
 
-    orangeStock--;
+  orangeStock--;
 
-    console.log("夏みかんを置いていった！");
+  console.log("夏みかんを置いていった！");
+
+  // 帽子を夏みかん入りへ
+  hatWithOrange = true;
 
   // =====================
   // 🍊なし
