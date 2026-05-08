@@ -1,6 +1,8 @@
 const game = document.getElementById("game");
 let gameOver = false;
 let gameOverTimer = null;
+const gameOverScreen =
+  document.getElementById("gameOverScreen");
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
@@ -26,6 +28,12 @@ let butterflyVX = -5;
 let butterflyVY = -5;
 
 let butterflyFrame = 0;
+
+gameOverScreen.addEventListener(
+  "click",
+  resetGame
+);
+
 
 // ===== タクシー位置 =====
 let taxiX = window.innerWidth / 2 - 48;
@@ -165,6 +173,7 @@ function checkCollision() {
 
     gameOverTimer = setTimeout(() => {
       gameOver = true;
+      gameOverScreen.style.display = "flex";
     }, 700);
   }
 
@@ -275,10 +284,37 @@ function gameLoop() {
 
   requestAnimationFrame(gameLoop);
 }
+function resetGame() {
+
+  gameOver = false;
+
+  orangeStock = 0;
+  firstOrangeCollected = false;
+
+  // タクシー位置
+  taxiX = window.innerWidth / 2 - 48;
+  taxiY = window.innerHeight * 0.5;
+
+  // 帽子位置
+  hatX = window.innerWidth + 300;
+
+  // 夏みかん位置
+  orangeX = window.innerWidth * 0.7;
+
+  // 蝶消す
+  butterflyActive = false;
+  butterfly.style.display = "none";
+
+  // UI消す
+  gameOverScreen.style.display = "none";
+
+  updateTaxi();
+}
 // =========================
 // スマホ操作
 // =========================
 game.addEventListener("touchmove", e => {
+  if (gameOver) return;
 
   e.preventDefault();
 
@@ -311,6 +347,7 @@ game.addEventListener("touchmove", e => {
 const keys = {};
 
 document.addEventListener("keydown", e => {
+  if (gameOver) return;
   keys[e.key] = true;
 });
 
