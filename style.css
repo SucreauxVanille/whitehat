@@ -107,3 +107,22 @@ img {
 
   z-index: 5;
 }
+#gameOverScreen {
+  position: absolute;
+  inset: 0;
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0,0,0,0.35);
+
+  z-index: 100;
+}
+
+#gameOverImage {
+  width: min(80vw, 420px);
+
+  image-rendering: pixelated;
+}
