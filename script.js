@@ -1,5 +1,5 @@
 const game = document.getElementById("game");
-
+let gameOver = false;
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
@@ -137,9 +137,10 @@ if (hit) {
 
   } else {
 
-    console.log("ちょうちょが逃げた！");
+  console.log("ちょうちょが逃げた！");
 
-  }
+  gameOver = true;
+}
 
   // 蝶出現
   butterflyActive = true;
@@ -233,26 +234,29 @@ function gameLoop() {
 
   updateKeyboardMove();
 
-  // 最初に夏みかんを拾うまで帽子を出さない
-  if (firstOrangeCollected) {
-    updateHat();
+  // GAME OVER中は停止
+  if (!gameOver) {
+
+    // 最初に夏みかんを拾うまで帽子を出さない
+    if (firstOrangeCollected) {
+      updateHat();
+    }
+
+    updateOrange();
+
+    updateRoadLine();
+
+    updateButterfly();
+
+    checkCollision();
+
+    checkOrangeCollision();
   }
-
-  updateOrange();
-
-  updateRoadLine();
-
-  updateButterfly();
-
-  checkCollision();
-
-  checkOrangeCollision();
 
   updateOrangeStockDisplay();
 
   requestAnimationFrame(gameLoop);
 }
-
 // =========================
 // スマホ操作
 // =========================
