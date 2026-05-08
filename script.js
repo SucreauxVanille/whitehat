@@ -161,10 +161,10 @@ function checkCollision() {
 
   butterfly.style.display = "block";
 
-  // =====================
-  // 🍊あり
-  // =====================
- if (orangeStock > 0) {
+// =====================
+// 🍊あり
+// =====================
+if (orangeStock > 0) {
 
   orangeStock--;
 
@@ -173,28 +173,29 @@ function checkCollision() {
   // 帽子を夏みかん入りへ
   hatWithOrange = true;
 
-  // =====================
-  // 🍊なし
-  // =====================
-  } else {
+// =====================
+// 🍊なし
+// =====================
+} else {
 
-    console.log("ちょうちょが逃げた！");
+  console.log("ちょうちょが逃げた！");
 
-    clearTimeout(gameOverTimer);
+  clearTimeout(gameOverTimer);
 
-    gameOverTimer = setTimeout(() => {
-      gameOver = true;
-      gameOverScreen.style.display = "flex";
-    }, 700);
-  }
+  gameOverTimer = setTimeout(() => {
+    gameOver = true;
+    gameOverScreen.style.display = "flex";
+  }, 700);
 
-  // 帽子を右へ戻す
+  // ← この場合だけ帽子リセット
   hatX = window.innerWidth + Math.random() * 300;
 
   hatY =
     game.clientHeight * 0.1 +
     Math.random() *
     (game.clientHeight * 0.9 - 120);
+}
+
 }
 // みかん関数、つまりみかんすう
 function updateOrange() {
