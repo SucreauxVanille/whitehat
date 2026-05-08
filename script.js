@@ -1,5 +1,6 @@
 const game = document.getElementById("game");
 let hatWithOrange = false;
+let hatInvincible = false;
 let gameOver = false;
 let gameOverTimer = null;
 const gameOverScreen =
@@ -49,6 +50,7 @@ const hatSpeed = 8;
 
 // ===== みかん速度 =====
 const orangeSpeed = hatSpeed;
+
 //ちょうちょ
 function updateButterfly() {
 
@@ -124,6 +126,12 @@ if (hatWithOrange) {
 } else {
   hat.src = "hat.gif";
 }
+  // orangehat中は当たり判定なし
+if (hatWithOrange) {
+  hatInvincible = true;
+} else {
+  hatInvincible = false;
+}
   hat.style.left = hatX + "px";
   hat.style.top = hatY + "px";
 }
@@ -143,8 +151,11 @@ function checkCollision() {
     taxiY < hatY + hatSize &&
     taxiY + taxiSize > hatY;
 
-  // 当たってなければ終了
-  if (!hit) return;
+// 当たり判定無効中
+if (hatInvincible) return;
+
+// 当たってなければ終了
+if (!hit) return;
 
   console.log("白いぼうしだ！");
 
@@ -284,8 +295,6 @@ function gameLoop() {
     updateOrange();
 
     updateRoadLine();
-
-  
 
     checkCollision();
 
