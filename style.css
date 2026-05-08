@@ -107,6 +107,18 @@ img {
 
   z-index: 5;
 }
+#orangeHat {
+  position: absolute;
+
+  width: 48px;
+  height: 48px;
+
+  display: none;
+
+  image-rendering: pixelated;
+
+  z-index: 4;
+}
 #gameOverScreen {
   position: absolute;
   inset: 0;
