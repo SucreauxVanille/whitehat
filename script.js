@@ -202,7 +202,7 @@ function updateOrangeStockDisplay() {
 
       // タクシー上へ並べる
       stock.style.left =
-        (taxiX + 2 + i * 26) + "px";
+        (taxiX - 4 + i * 26) + "px";
 
       stock.style.top =
         (taxiY - 20) + "px";
