@@ -118,8 +118,8 @@ hatY =
 function checkCollision() {
 
   // 当たり判定サイズ
-  const taxiSize = 96;
-  const hatSize = 72;
+  const taxiSize = 84;
+  const hatSize = 64;
 
   const hit =
     taxiX < hatX + hatSize &&
@@ -127,55 +127,54 @@ function checkCollision() {
     taxiY < hatY + hatSize &&
     taxiY + taxiSize > hatY;
 
-if (hit) {
+  // 当たってなければ終了
+  if (!hit) return;
 
-  // ===== 夏みかん所持 =====
+  console.log("白いぼうしだ！");
+
+  // =====================
+  // 蝶出現（共通）
+  // =====================
+  butterflyActive = true;
+
+  // 今の帽子位置を保存
+  butterflyX = hatX;
+  butterflyY = hatY;
+
+  butterflyFrame = 0;
+
+  butterfly.style.display = "block";
+
+  // =====================
+  // 🍊あり
+  // =====================
   if (orangeStock > 0) {
 
     orangeStock--;
 
     console.log("夏みかんを置いていった！");
 
+  // =====================
+  // 🍊なし
+  // =====================
   } else {
 
-  console.log("ちょうちょが逃げた！");
+    console.log("ちょうちょが逃げた！");
 
-  // 蝶出現
-  butterflyActive = true;
+    clearTimeout(gameOverTimer);
 
-  butterflyX = hatX;
-  butterflyY = hatY;
-
-  butterflyFrame = 0;
-
-  butterfly.style.display = "block";
-
-  // 帽子を消す
-  hatX = window.innerWidth + Math.random() * 300;
-
-  // 少し待って停止
-  clearTimeout(gameOverTimer);
-
-  gameOverTimer = setTimeout(() => {
-    gameOver = true;
-  }, 700);
-}
-
-  // 蝶出現
-  butterflyActive = true;
-
-  butterflyX = hatX;
-  butterflyY = hatY;
-
-  butterflyFrame = 0;
-
-  butterfly.style.display = "block";
+    gameOverTimer = setTimeout(() => {
+      gameOver = true;
+    }, 700);
+  }
 
   // 帽子を右へ戻す
   hatX = window.innerWidth + Math.random() * 300;
 
-  hatY = Math.random() * (game.clientHeight - 120);
-}
+  hatY =
+    game.clientHeight * 0.1 +
+    Math.random() *
+    (game.clientHeight * 0.9 - 120);
 }
 // みかん関数、つまりみかんすう
 function updateOrange() {
@@ -265,13 +264,13 @@ function gameLoop() {
 
     updateRoadLine();
 
-    updateButterfly();
+  
 
     checkCollision();
 
     checkOrangeCollision();
   }
-
+  updateButterfly();
   updateOrangeStockDisplay();
 
   requestAnimationFrame(gameLoop);
