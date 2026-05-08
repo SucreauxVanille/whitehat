@@ -1,5 +1,6 @@
 const game = document.getElementById("game");
 let gameOver = false;
+let gameOverTimer = null;
 const taxi = document.getElementById("taxi");
 const hat = document.getElementById("hat");
 const roadLine = document.getElementById("roadLine");
@@ -139,7 +140,25 @@ if (hit) {
 
   console.log("ちょうちょが逃げた！");
 
-  gameOver = true;
+  // 蝶出現
+  butterflyActive = true;
+
+  butterflyX = hatX;
+  butterflyY = hatY;
+
+  butterflyFrame = 0;
+
+  butterfly.style.display = "block";
+
+  // 帽子を消す
+  hatX = window.innerWidth + Math.random() * 300;
+
+  // 少し待って停止
+  clearTimeout(gameOverTimer);
+
+  gameOverTimer = setTimeout(() => {
+    gameOver = true;
+  }, 700);
 }
 
   // 蝶出現
