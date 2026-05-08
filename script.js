@@ -196,7 +196,7 @@ if (orangeStock > 0) {
   gameOverTimer = setTimeout(() => {
     gameOver = true;
     gameOverScreen.style.display = "flex";
-  }, 700);
+  }, 400);
 
   // ← この場合だけ帽子リセット
   hatX = window.innerWidth + Math.random() * 300;
