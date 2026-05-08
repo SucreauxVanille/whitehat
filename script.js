@@ -297,18 +297,25 @@ function resetGame() {
 
   // 帽子位置
   hatX = window.innerWidth + 300;
+  hatY = 200;
 
   // 夏みかん位置
   orangeX = window.innerWidth * 0.7;
+  orangeY = 300;
 
   // 蝶消す
   butterflyActive = false;
   butterfly.style.display = "none";
 
-  // UI消す
   gameOverScreen.style.display = "none";
 
   updateTaxi();
+
+  hat.style.left = hatX + "px";
+  hat.style.top = hatY + "px";
+
+  orange.style.left = orangeX + "px";
+  orange.style.top = orangeY + "px";
 }
 // =========================
 // スマホ操作
