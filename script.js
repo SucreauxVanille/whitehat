@@ -1,4 +1,7 @@
 const game = document.getElementById("game");
+const SKY_RATIO = 0.18;
+const buildings = document.getElementById("buildings");
+let buildingX = 0;
 let hatWithOrange = false;
 let hatInvincible = false;
 let gameOver = false;
@@ -92,6 +95,55 @@ function updateRoadLine() {
   roadLine.style.left = roadX + "px";
 }
 // =========================
+// ビル生成
+// =========================
+function createBuildings() {
+
+  buildings.innerHTML = "";
+
+  let totalWidth = 0;
+
+  while (totalWidth < window.innerWidth * 2) {
+
+    const building =
+      document.createElement("div");
+
+    building.classList.add("building");
+
+    // 幅ランダム
+    const width =
+      40 + Math.random() * 90;
+
+    // 高さランダム
+    const height =
+      20 + Math.random() * 120;
+
+    building.style.width =
+      width + "px";
+
+    building.style.height =
+      height + "px";
+
+    buildings.appendChild(building);
+
+    totalWidth += width + 6;
+  }
+}
+// =========================
+// ビル移動
+// =========================
+function updateBuildings() {
+
+  buildingX -= hatSpeed * 0.3;
+
+  if (buildingX <= -window.innerWidth) {
+    buildingX = 0;
+  }
+
+  buildings.style.left =
+    buildingX + "px";
+}
+// =========================
 // タクシー更新
 // =========================
 function updateTaxi() {
@@ -115,7 +167,7 @@ if (hatX < -80) {
     hatX = window.innerWidth + Math.random() * 300;
 
     // 高さランダム
-const skyHeight = game.clientHeight * 0.1;
+const skyHeight = game.clientHeight * SKY_RATIO;
 
 hatY =
   skyHeight +
@@ -218,7 +270,7 @@ function updateOrange() {
 
     orangeX = window.innerWidth + Math.random() * 400;
 
-    const skyHeight = game.clientHeight * 0.1;
+  const skyHeight = game.clientHeight * SKY_RATIO;
 
     orangeY =
       skyHeight +
@@ -280,6 +332,7 @@ function updateOrangeStockDisplay() {
 // =========================
 // ゲームループ
 // =========================
+createBuildings();
 function gameLoop() {
 
   updateKeyboardMove();
@@ -295,7 +348,7 @@ function gameLoop() {
     updateOrange();
 
     updateRoadLine();
-
+    updateBuildings();
     checkCollision();
 
     checkOrangeCollision();
@@ -358,7 +411,7 @@ game.addEventListener("touchmove", e => {
     Math.min(taxiX, rect.width - 96)
   );
 
-  const skyHeight = game.clientHeight * 0.1;
+const skyHeight = game.clientHeight * SKY_RATIO;
 
   taxiY = Math.max(
     skyHeight,
@@ -411,7 +464,7 @@ function updateKeyboardMove() {
   );
 
   // 空侵入禁止
-  const skyHeight = game.clientHeight * 0.1;
+const skyHeight = game.clientHeight * SKY_RATIO;
 
   taxiY = Math.max(
     skyHeight,
