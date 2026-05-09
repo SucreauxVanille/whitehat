@@ -101,33 +101,35 @@ function createBuildings() {
 
   buildings.innerHTML = "";
 
+  let buildingHTML = "";
+
   let totalWidth = 0;
 
-  while (totalWidth < window.innerWidth * 2) {
-
-    const building =
-      document.createElement("div");
-
-    building.classList.add("building");
+  while (totalWidth < window.innerWidth) {
 
     // 幅ランダム
     const width =
-      20 + Math.random() * 80;
+      40 + Math.random() * 80;
 
     // 高さランダム
     const height =
       20 + Math.random() * 100;
 
-    building.style.width =
-      width + "px";
-
-    building.style.height =
-      height + "px";
-
-    buildings.appendChild(building);
+    buildingHTML += `
+      <div class="building"
+        style="
+          width:${width}px;
+          height:${height}px;
+        ">
+      </div>
+    `;
 
     totalWidth += width + 6;
   }
+
+  // 同じものを2回並べる
+  buildings.innerHTML =
+    buildingHTML + buildingHTML;
 }
 // =========================
 // ビル移動
@@ -136,6 +138,7 @@ function updateBuildings() {
 
   buildingX -= hatSpeed * 0.3;
 
+  // 半分進んだらループ
   if (buildingX <= -window.innerWidth) {
     buildingX = 0;
   }
