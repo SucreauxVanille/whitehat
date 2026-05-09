@@ -1,5 +1,5 @@
 const game = document.getElementById("game");
-const SKY_RATIO = 0.18;
+const SKY_RATIO = 0.24;
 const buildings = document.getElementById("buildings");
 let buildingX = 0;
 let hatWithOrange = false;
@@ -112,11 +112,11 @@ function createBuildings() {
 
     // 幅ランダム
     const width =
-      40 + Math.random() * 90;
+      20 + Math.random() * 80;
 
     // 高さランダム
     const height =
-      20 + Math.random() * 120;
+      20 + Math.random() * 100;
 
     building.style.width =
       width + "px";
