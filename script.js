@@ -1,4 +1,6 @@
 const game = document.getElementById("game");
+let butterflyScore = 0;
+const scoreText = document.getElementById("scoreText");
 const SKY_RATIO = 0.24;
 const buildings = document.getElementById("buildings");
 let buildingX = 0;
@@ -233,7 +235,10 @@ if (!hit) return;
 if (orangeStock > 0) {
 
   orangeStock--;
+  butterflyScore++;
 
+  scoreText.textContent =
+    butterflyScore;
   console.log("夏みかんを置いていった！");
 
   // 帽子を夏みかん入りへ
@@ -383,6 +388,10 @@ function resetGame() {
   // 蝶消す
   butterflyActive = false;
   butterfly.style.display = "none";
+
+  //スコアリセット
+  butterflyScore = 0;
+  scoreText.textContent = 0;
 
   gameOverScreen.style.display = "none";
 
