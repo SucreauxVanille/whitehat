@@ -203,3 +203,35 @@ img {
 
   image-rendering: pixelated;
 }
+/* =========================
+   スコア
+========================= */
+#scoreBox {
+  position: absolute;
+
+  top: 12px;
+  right: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 20;
+
+  color: white;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  text-shadow:
+    2px 2px 0 #444;
+}
+
+#scoreButterfly {
+  position: static;
+
+  width: 28px;
+  height: 28px;
+
+  image-rendering: pixelated;
+}
