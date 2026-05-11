@@ -300,18 +300,27 @@ function checkOrangeCollision() {
     taxiY < orangeY + orangeSize &&
     taxiY + taxiSize > orangeY;
 
-  if (hit) {
+ if (hit) {
 
-    // 最大3個
-    if (orangeStock < 3) {
-      orangeStock++;
-    }
-
-    firstOrangeCollected = true;
-
-    // 消す
-    orangeX = window.innerWidth + Math.random() * 400;
+  // 最大3個
+  if (orangeStock < 3) {
+    orangeStock++;
   }
+
+  firstOrangeCollected = true;
+
+  // 再出現位置
+  orangeX =
+    window.innerWidth + Math.random() * 400;
+
+  const skyHeight =
+    game.clientHeight * SKY_RATIO;
+
+  orangeY =
+    skyHeight +
+    Math.random() *
+    (game.clientHeight - skyHeight - 120);
+}
 }
 function updateOrangeStockDisplay() {
 
