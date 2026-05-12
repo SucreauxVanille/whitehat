@@ -163,7 +163,7 @@ function flashTaxi() {
 
   setTimeout(() => {
     taxi.classList.remove("flash");
-  }, 100);
+  }, 50);
 }
 
 // =========================
