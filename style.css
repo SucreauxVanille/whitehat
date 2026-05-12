@@ -116,7 +116,7 @@ img {
   left: 50px;
   top: 300px;
   z-index: 10;
-  transition: filter 0.1s;
+  transition: filter 0.05s;
 }
 
 .flash {
