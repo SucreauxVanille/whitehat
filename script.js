@@ -156,6 +156,16 @@ function updateTaxi() {
   taxi.style.top = taxiY + "px";
 }
 
+//点滅
+function flashTaxi() {
+
+  taxi.classList.add("flash");
+
+  setTimeout(() => {
+    taxi.classList.remove("flash");
+  }, 50);
+}
+
 // =========================
 // 帽子更新
 // =========================
@@ -215,7 +225,8 @@ if (hatInvincible) return;
 if (!hit) return;
 
   console.log("白いぼうしだ！");
-
+  flashTaxi();
+  
   // =====================
   // 蝶出現（共通）
   // =====================
@@ -289,6 +300,7 @@ function updateOrange() {
   orange.style.left = orangeX + "px";
   orange.style.top = orangeY + "px";
 }
+//みかん衝突
 function checkOrangeCollision() {
 
   const taxiSize = 96;
@@ -301,7 +313,7 @@ function checkOrangeCollision() {
     taxiY + taxiSize > orangeY;
 
  if (hit) {
-
+  flashTaxi();
   // 最大3個
   if (orangeStock < 3) {
     orangeStock++;
