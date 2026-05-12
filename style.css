@@ -116,11 +116,11 @@ img {
   left: 50px;
   top: 300px;
   z-index: 10;
-  transition: filter 0.05s;
+  transition: filter 0.1s;
 }
 
 .flash {
-  filter: brightness(2.5);
+  filter: brightness(2.0);
 }
 /* =========================
    白いぼうし
